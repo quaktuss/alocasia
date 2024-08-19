@@ -26,3 +26,12 @@ variable "default_tags" {
     "dhole:tenant_name"   = "dhole" # snake_case
   }
 }
+
+variable "asg_compute" {
+  description = "Multiple value for difference autoscaling group"
+  type = list(object({
+    custom_user_data = string
+    asg-name         = string
+
+  }))
+}
