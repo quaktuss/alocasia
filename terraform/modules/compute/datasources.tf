@@ -13,3 +13,7 @@ data "aws_ami" "ubuntu" {
 
   owners = ["099720109477"] # Canonical
 }
+
+data "aws_key_pair" "default_test_keypair" {
+  key_name = "dhole_test_keypair"
+}

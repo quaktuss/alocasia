@@ -5,13 +5,13 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-# variable "default_user_data" {
-#   description = "Default user data with autodelete after 3hr of use"
-#   type        = string
-#   nullable    = true
+variable "default_user_data" {
+  description = "Default user data with autodelete after 3hr of use"
+  type        = string
+  # sensitive   = true
 
-#   default = templatefile("${path.module}/userdata.sh", {})
-# }
+  default = "userdata.sh"
+}
 
 variable "custom_user_data" {
   description = "Custom userdata, need to be configure by the project team"
@@ -31,4 +31,12 @@ variable "instance_schedule" {
   type        = string
 
   default = "* */3 * * *"
+}
+
+
+variable "autoscaling_group_name" {
+  description = "Customer name : asg-projectname-environnement"
+  type        = string
+
+  default = "dhole-default-name"
 }
