@@ -30,8 +30,13 @@ variable "default_tags" {
 variable "asg_compute" {
   description = "Multiple value for difference autoscaling group"
   type = list(object({
-    custom_user_data = string
-    asg-name         = string
-
+    custom_user_data_filename = string
+    asg_name                  = string
   }))
+
+  default = [{
+    # custom_user_data = templatefile("./script/dhole.test.sh", {})
+    custom_user_data_filename = "dhole.test.sh"
+    asg_name                  = "asg-test-dhole-dev"
+  }]
 }
