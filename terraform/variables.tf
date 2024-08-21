@@ -8,7 +8,8 @@ variable "region" {
 variable "dhole_profile" {
   description = "profile name on ~/.aws/credentials"
 
-  type    = string
+  type = string
+  # default = "personal_aws_account"
   default = "default"
 }
 
@@ -36,7 +37,7 @@ variable "asg_compute" {
 
   default = [{
     # custom_user_data = templatefile("./script/dhole.test.sh", {})
-    custom_user_data_filename = "dhole.test.sh"
+    custom_user_data_filename = "./script/dhole.test.sh"
     asg_name                  = "asg-test-dhole-dev"
   }]
 }

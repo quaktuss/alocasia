@@ -10,7 +10,7 @@ variable "default_user_data" {
   type        = string
   # sensitive   = true
 
-  default = "userdata.sh"
+  default = "${path.module}/userdata.sh"
 }
 
 variable "custom_user_data" {
