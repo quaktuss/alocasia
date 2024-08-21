@@ -6,9 +6,10 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "dhole-backend"
-    key    = "state/terraform.tfstate"
-    region = "eu-west-1"
+    bucket  = "dhole-backend"
+    key     = "state/terraform.tfstate"
+    region  = "eu-west-1"
+    profile = "personal_aws_account"
   }
 }
 
