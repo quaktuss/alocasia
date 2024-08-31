@@ -5,12 +5,10 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-variable "default_user_data" {
-  description = "Default user data with autodelete after 3hr of use"
-  type        = string
-  # sensitive   = true
 
-  default = "${path.module}/userdata.sh"
+# default user data to install ssm and 3hr kamikaze"
+locals {
+  default_user_data = "${path.module}/userdata.sh"
 }
 
 variable "custom_user_data" {
@@ -30,13 +28,11 @@ variable "instance_schedule" {
   description = "At every minute past every 3rd hour. https://crontab.guru/"
   type        = string
 
-  default = "* */3 * * *"
+  default = "0 0/3 ? * * *"
 }
 
 
-variable "autoscaling_group_name" {
-  description = "Customer name : asg-projectname-environnement"
+variable "name_prefix" {
+  description = "Customer name : projectid-tenantid-projectname-environnement"
   type        = string
-
-  default = "dhole-default-name"
 }
