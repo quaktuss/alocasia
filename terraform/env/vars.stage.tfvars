@@ -1,1 +1,1 @@
-default_tags = {"dhole:environnement" = "stage"}
+principal_informations = {environment = "stage"}
