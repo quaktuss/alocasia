@@ -13,7 +13,7 @@ variable "dhole_profile" {
   default = "default"
 }
 
-variable "default_tags" {
+variable "principal_informations" {
   description = "Default tags for dhole optimisation and iam"
   # Three different environments : 
   # dev   : Developers playground (only accessible by devs)
@@ -22,22 +22,37 @@ variable "default_tags" {
 
   type = map(string)
   default = {
-    "dhole:environnement" = "dev"   # dev/(N/A), stage/val, prod
-    "dhole:project_id"    = "0a"    # 2 digits
-    "dhole:tenant_name"   = "dhole" # snake_case
+    environment  = "dev"   # dev/(N/A), stage/val, prod
+    project_id   = "0a"    # 2 digits
+    project_name = "dhole" # one word
+    tenant_name  = "dhole" # snake_case
+    tenant_id    = "1a"    # 2 digits
+
   }
 }
+
+locals {
+  common_tags = {
+    "dhole:environnement" = var.principal_informations["environment"]
+    "dhole:project_id"    = var.principal_informations["project_id"]
+    "dhole:project_name"  = var.principal_informations["project_name"]
+    "dhole:tenant_name"   = var.principal_informations["tenant_name"]
+    "dhole:tenant_id"     = var.principal_informations["tenant_id"]
+  }
+  name_prefix = "${var.principal_informations["environment"]}-${var.principal_informations["project_id"]}-${var.principal_informations["project_name"]}"
+}
+
 
 variable "asg_compute" {
   description = "Multiple value for difference autoscaling group"
   type = list(object({
     custom_user_data_filename = string
-    asg_name                  = string
+    compute_name_suffix       = string
   }))
 
   default = [{
     # custom_user_data = templatefile("./script/dhole.test.sh", {})
     custom_user_data_filename = "./script/dhole.test.sh"
-    asg_name                  = "asg-test-dhole-dev"
+    compute_name_suffix       = "test"
   }]
 }
