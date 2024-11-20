@@ -36,3 +36,12 @@ variable "name_prefix" {
   description = "Customer name : projectid-tenantid-projectname-environnement"
   type        = string
 }
+
+variable "keypair_name" {
+  description = "keypair for all instances"
+  sensitive   = true
+  type        = string
+
+  default = ""
+}
+
