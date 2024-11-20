@@ -39,7 +39,6 @@ variable "name_prefix" {
 
 variable "keypair_name" {
   description = "keypair for all instances"
-  sensitive   = true
   type        = string
 
   default = ""
