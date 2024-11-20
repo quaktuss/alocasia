@@ -1,0 +1,1 @@
+default_tags = {"dhole:environnement" = "prod"}
