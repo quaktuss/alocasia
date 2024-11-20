@@ -4,6 +4,7 @@ resource "aws_launch_template" "custom_ubuntu_2404" {
   instance_type                        = var.instance_type
   instance_initiated_shutdown_behavior = var.terminated_instance
   user_data                            = base64encode("${templatefile("${local.default_user_data}", {})}${var.custom_user_data}")
+  key_name                             = data.aws_key_pair.default_test_keypair
 }
 
 # Default ASG setting after deploy
